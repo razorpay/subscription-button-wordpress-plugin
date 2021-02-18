@@ -8,7 +8,7 @@ require_once __DIR__ . '/../includes/rzp-subscription-buttons.php';
 require_once __DIR__.'/../razorpay-sdk/Razorpay.php';
 require_once __DIR__ . '/../includes/errors/payment-button-error-code.php';
 
-class RZP_View_Button_Templates
+class RZP_View_Subscription_Button_Templates
 {
 
     public function __construct()
@@ -27,7 +27,7 @@ class RZP_View_Button_Templates
             wp_die("This page consist some request parameters to view response");
         }
 
-        $previous_page_url = admin_url('admin.php?page=razorpay_button');
+        $previous_page_url = admin_url('admin.php?page=razorpay_Subscription_button');
         $button_detail = $this->fetch_button_detail(sanitize_text_field($_REQUEST['btn']));
         
         $show = "jQuery('.overlay').show()";

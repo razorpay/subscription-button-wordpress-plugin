@@ -2,7 +2,7 @@
 
 require_once __DIR__.'/../templates/razorpay-settings-templates.php';
 
-class RZP_Setting
+class RZP_Subscription_Setting
 {
     public function __construct()
     {
@@ -20,7 +20,7 @@ class RZP_Setting
         
         $this->paymentAction = get_option('payment_action_field');
 
-        $this->template = new RZP_Payment_Button_Templates();
+        $this->template = new RZP_Subscription_Button_Templates();
     }
 
     /**

@@ -34,6 +34,14 @@ These are the features that you will get without any premium paywalls
 5. Select Add Block → Razorpay: Subscription Button widget to embed Payment button to page/posts.
 6. Choose Subscription Button using the drop down button.
 
+== Changelog ==
+
+
+= 1.0 =
+* Initial Changes
+* Tested upto WordPress 5.6.1
+
+
 == Frequently Asked Questions ==
 
 = You would need to have the following for the plugin to work seamlessly =
@@ -61,5 +69,5 @@ Visit https://razorpay.com for support requests or email contact@razorpay.com.
 
 == License ==
 
-The Razorpay Payment Button plugin is released under the GPLv2 license, same as that
+The Razorpay Subscription Button plugin is released under the GPLv2 license, same as that
 of WordPress. See the LICENSE file for the complete LICENSE text.

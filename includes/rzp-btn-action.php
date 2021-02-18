@@ -6,7 +6,7 @@ use Razorpay\PaymentButton\Errors as BtnErrors;
 
 require_once __DIR__ . '/../includes/rzp-subscription-buttons.php';
 
-class RZP_Button_Action
+class RZP_Subscription_Button_Action
 {
     public function __construct()
     {
@@ -22,7 +22,7 @@ class RZP_Button_Action
     {
         $btn_id = sanitize_text_field($_POST['btn_id']);
         $action = sanitize_text_field($_POST['btn_action']);
-        $page_url = admin_url( 'admin.php?page=rzp_button_view&btn='.$btn_id );
+        $page_url = admin_url( 'admin.php?page=rzp_subscription_button_view&btn='.$btn_id );
 
         try
         {
@@ -34,7 +34,7 @@ class RZP_Button_Action
 
             throw new Errors\Error(
                 $message,
-                BtnErrors\Payment_Button_Error_Code::API_PAYMENT_BUTTON_ACTION_FAILED,
+                BtnErrors\Payment_Button_Subscription_Error_Code::API_PAYMENT_BUTTON_ACTION_FAILED,
                 400
             );
         }

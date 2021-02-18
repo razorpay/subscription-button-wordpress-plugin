@@ -10,7 +10,7 @@ if( ! class_exists( 'WP_List_Table' ) ) {
     require_once( ABSPATH . 'wp-admin/includes/class-wp-list-table.php' );
 }
 
-class RZP_Subscription_Buttons extends WP_List_Table {
+class RZP_Subscription_Button extends WP_List_Table {
         
     function __construct() 
     {
@@ -137,7 +137,7 @@ class RZP_Subscription_Buttons extends WP_List_Table {
     function column_title($item) 
     {
         $actions = array(
-            'view'      => sprintf('<a href="?page=%s&btn=%s">View</a>','rzp_button_view', $item['id']),
+            'view'      => sprintf('<a href="?page=%s&btn=%s">View</a>','rzp_subscription_button_view', $item['id']),
         );
 
         return sprintf('%1$s %2$s', $item['title'], $this->row_actions($actions, $always_visible = true ) );

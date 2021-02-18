@@ -157,9 +157,9 @@ button:hover {
 	color: #fc1d1d;
 	padding: .75em 1em;
 }
-.rzp-block__placeholder {
-	background: url("../../public/image/payment-button.svg") no-repeat;
-	width: 606px !important;
+.rzp-block__placeholder_sub {
+	background: url("../../public/image/subscription-button.svg") no-repeat;
+	width: 610px !important;
 	background-size: cover;
 }
 .rzp-block__panel {

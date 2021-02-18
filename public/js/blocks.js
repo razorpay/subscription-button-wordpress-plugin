@@ -173,7 +173,7 @@ class Edit extends Component {
   }
 
   static getButton(buttonId) {
-    return razorpay.payment_buttons.find(button => button.id == buttonId);
+    return razorpaybutton.payment_buttons.find(button => button.id == buttonId);
   }
 
   static getButtonOptions() {
@@ -183,9 +183,9 @@ class Edit extends Component {
       value: ''
     }];
 
-    for (let i = 0; i < razorpay.payment_buttons.length; i++) {
+    for (let i = 0; i < razorpaybutton.payment_buttons.length; i++) {
 
-      let button = razorpay.payment_buttons[i];
+      let button = razorpaybutton.payment_buttons[i];
 
       options.push({
         label: button.title,
@@ -270,11 +270,11 @@ class Edit extends Component {
       const formConstruct = React.createElement("form", null, 
         React.createElement("script", {
           src: "https://cdn.razorpay.com/static/widget/subscription-button.js",
-          "data-plugin": "wordpress_"+razorpay.payment_buttons_plugin_version,
+          "data-plugin": "wordpress_"+razorpaybutton.payment_buttons_plugin_version,
           "data-subscription_button_id": buttonId,
           "async": 1
         }, " "), " ");
-      const updatedContent = '<form><script src="https://cdn.razorpay.com/static/widget/subscription-button.js" data-plugin ="wordpress_'+razorpay.payment_buttons_plugin_version+'" data-subscription_button_id="'+ buttonId +'"> </script> </form>';
+      const updatedContent = '<form><script src="https://cdn.razorpay.com/static/widget/subscription-button.js" data-plugin ="wordpress_'+razorpaybutton.payment_buttons_plugin_version+'" data-subscription_button_id="'+ buttonId +'"> </script> </form>';
       this.props.setAttributes({ buttonContent: updatedContent });
       formContent.props.children = formConstruct;
     }
@@ -295,7 +295,7 @@ class Edit extends Component {
         )
       ), React.createElement(
         Placeholder,
-        { key: 'placeholder', className: 'wp-block-embed rzp-block__placeholder'},
+        { key: 'placeholder', className: 'wp-block-embed rzp-block__placeholder_sub'},
         React.createElement(
           'form',
           { className: 'rzp-block__placeholder-select'},
