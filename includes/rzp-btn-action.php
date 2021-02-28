@@ -2,7 +2,7 @@
 
 use Razorpay\Api\Api;
 use Razorpay\Api\Errors;
-use Razorpay\PaymentButton\Errors as BtnErrors;
+use Razorpay\SubscriptionButton\Errors as BtnErrors;
 
 require_once __DIR__ . '/../includes/rzp-subscription-buttons.php';
 
@@ -34,7 +34,7 @@ class RZP_Subscription_Button_Action
 
             throw new Errors\Error(
                 $message,
-                BtnErrors\Payment_Button_Subscription_Error_Code::API_PAYMENT_BUTTON_ACTION_FAILED,
+                BtnErrors\Payment_Button_Subscription_Error_Code::API_SUBSCRIPTION_BUTTON_ACTION_FAILED,
                 400
             );
         }

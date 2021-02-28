@@ -9,7 +9,7 @@ set -euo pipefail
 # Slightly adapted
 
 SVNUSER=razorpay
-PLUGINSLUG='razorpay-payment-button'
+PLUGINSLUG='razorpay-susbcription-button'
 
 # main config
 CURRENTDIR="$(pwd)/"

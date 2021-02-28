@@ -2,7 +2,7 @@
 
 use Razorpay\Api\Api;
 use Razorpay\Api\Errors;
-use Razorpay\PaymentButton\Errors as BtnErrors;
+use Razorpay\SubscriptionButton\Errors as BtnErrors;
 
 require_once __DIR__ . '/../includes/rzp-subscription-buttons.php';
 require_once __DIR__.'/../razorpay-sdk/Razorpay.php';
@@ -89,7 +89,7 @@ class RZP_View_Subscription_Button_Templates
                 <button type="button" onclick="'.$hide.'" class="btn btn-default">No, don`t!</button>
                 <button type="submit" onclick="'.$hide.'" name="btn_action" value="'.$button_detail['btn_pointer_status'].'" class="btn btn-primary">Yes, '.$button_detail['btn_pointer_status'].'</button>
                 <input type="hidden" name="btn_id" value="'.$button_detail['id'].'">
-                <input type="hidden" name="action" value="rzp_btn_action">
+                <input type="hidden" name="action" value="rzp_sub_btn_action">
             </div>
         </div>
     </div>
