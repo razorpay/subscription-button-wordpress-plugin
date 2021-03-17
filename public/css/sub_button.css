@@ -175,3 +175,6 @@ button:hover {
     white-space: nowrap;
     font-size: 100%;
 }
+p:empty:before {
+    display: none;
+}
