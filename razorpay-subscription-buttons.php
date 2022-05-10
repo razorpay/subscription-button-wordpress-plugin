@@ -1,9 +1,10 @@
 <?php
+
 /**
  * Plugin Name: Razorpay Subscription Button
  * Plugin URI:  https://github.com/razorpay/subscription-button-wordpress-plugin
  * Description: Razorpay Subscription Button
- * Version:     1.0.1
+ * Version:     1.0.2
  * Author:      Razorpay
  * Author URI:  https://razorpay.com
  */
