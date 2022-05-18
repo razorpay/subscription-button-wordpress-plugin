@@ -22,7 +22,7 @@ class RZP_Subscription_Button_Action
     {
         $btn_id = sanitize_text_field($_POST['btn_id']);
         $action = sanitize_text_field($_POST['btn_action']);
-        $page_url = admin_url( 'admin.php?page=rzp_subscription_button_view&btn='.$btn_id );
+        $page_url = admin_url('admin.php?page=rzp_subscription_button_view&btn='.$btn_id);
 
         try
         {

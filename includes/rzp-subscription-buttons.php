@@ -6,12 +6,13 @@ require_once __DIR__.'/../razorpay-sdk/Razorpay.php';
 use Razorpay\Api\Api;
 use Razorpay\Api\Errors;
 
-if( ! class_exists( 'WP_List_Table' ) ) {
-    require_once( ABSPATH . 'wp-admin/includes/class-wp-list-table.php' );
+if(! class_exists('WP_List_Table'))
+{
+    require_once(ABSPATH . 'wp-admin/includes/class-wp-list-table.php');
 }
 
-class RZP_Subscription_Button extends WP_List_Table {
-        
+class RZP_Subscription_Button extends WP_List_Table
+{
     function __construct() 
     {
         parent::__construct( 
@@ -38,8 +39,7 @@ class RZP_Subscription_Button extends WP_List_Table {
         echo '<form method="post">
             <input type="hidden" name="page" value="">';
         
-        $this->search_box( 'search', 'search_id' );
-        $this->display();  
+        $this->display();
         
         echo '</form></div>
             </div>';
@@ -50,7 +50,6 @@ class RZP_Subscription_Button extends WP_List_Table {
      */
     function get_columns() 
     {
-
         $columns = array(
             'title'=>__('Title'),
             'total_sales'=>__('Total Sales'),
@@ -61,7 +60,7 @@ class RZP_Subscription_Button extends WP_List_Table {
         return $columns;
     }   
 
-    function column_default( $item, $column_name ) 
+    function column_default($item, $column_name)
     {
         switch($column_name) 
         {
@@ -70,11 +69,9 @@ class RZP_Subscription_Button extends WP_List_Table {
             case 'total_sales':
             case 'created_at':
             case 'status':
-                return $item[ $column_name ];
-
+                return $item[$column_name];
             default:
-          
-            return print_r( $item, true ) ; //Show the whole array for troubleshooting purposes
+                return print_r($item, true) ; //Show the whole array for troubleshooting purposes
         }
     }       
         
@@ -84,53 +81,51 @@ class RZP_Subscription_Button extends WP_List_Table {
         
         if(isset($_REQUEST['status']))
         {
-            $current = ( !empty(sanitize_text_field($_REQUEST['status'])) ? sanitize_text_field($_REQUEST['status']) : 'all');
+            $current = (!empty(sanitize_text_field($_REQUEST['status'])) ? sanitize_text_field($_REQUEST['status']) : 'all');
         }
 
         $views = array();
 
         //All Buttons
-        $class = ($current == 'all' ? ' class="current"' :'');
+        $class = ($current === 'all' ? ' class="current"' :'');
         $all_url = remove_query_arg('status');
         $views['all'] = "<a href='{$all_url }' {$class} >All</a>";
 
         //Recovered link
         $foo_url = add_query_arg('status','active');
-        $class = ($current == 'active' ? ' class="current"' :'');
+        $class = ($current === 'active' ? ' class="current"' :'');
         $views['status'] = "<a href='{$foo_url}' {$class} >Enabled</a>";
 
         //Abandon
         $bar_url = add_query_arg('status','inactive');
-        $class = ($current == 'inactive' ? ' class="current"' :'');
+        $class = ($current === 'inactive' ? ' class="current"' :'');
         $views['disabled'] = "<a href='{$bar_url}' {$class} >Disabled</a>";
 
         return $views;
-                
     }
-        
-        
-        
-    function usort_reorder( $a, $b ) 
+
+    function usort_reorder($a, $b)
     {
-        if(isset($_GET['orderby']) && isset($_GET['order']))
+        if(isset($_GET['orderby']) and isset($_GET['order']))
         {
             // If no sort, default to title
-            $orderby = ( ! empty(sanitize_text_field($_GET['orderby'])) ) ? sanitize_text_field($_GET['orderby']) : 'title';
+            $orderby = (! empty(sanitize_text_field($_GET['orderby']))) ? sanitize_text_field($_GET['orderby']) : 'title';
             // If no order, default to asc
-            $order = ( ! empty(sanitize_text_field($_GET['order'] ) ) ) ? sanitize_text_field($_GET['order']) : 'desc';
+            $order = (! empty(sanitize_text_field($_GET['order']))) ? sanitize_text_field($_GET['order']) : 'desc';
             // Determine sort order
-            $result = strcmp( $a[$orderby], $b[$orderby] );
+            $result = strcmp($a[$orderby], $b[$orderby]);
+
             // Send final sort direction to usort
-            return ( $order === 'asc' ) ? $result : -$result;
+            return ($order === 'asc') ? $result : -$result;
         }
-        
     }
         
     function get_sortable_columns() 
     {
         $sortable_columns = array(
-        'title'  => array('title',false),
+            'title'  => array('title',false),
         );
+
         return $sortable_columns;
     }
 
@@ -140,7 +135,7 @@ class RZP_Subscription_Button extends WP_List_Table {
             'view'      => sprintf('<a href="?page=%s&btn=%s">View</a>','rzp_subscription_button_view', $item['id']),
         );
 
-        return sprintf('%1$s %2$s', $item['title'], $this->row_actions($actions, $always_visible = true ) );
+        return sprintf('%1$s %2$s', $item['title'], $this->row_actions($actions, $always_visible = true));
     }
 
     /**
@@ -148,13 +143,12 @@ class RZP_Subscription_Button extends WP_List_Table {
     */  
     function prepare_items() 
     {
-
-        $per_page = 2;
+        $per_page = 10;
         $current_page = $this->get_pagenum();
 
         if (1 < $current_page) 
         {
-            $offset = $per_page * ( $current_page - 1 );
+            $offset = $per_page * ($current_page - 1);
         } 
         else 
         {
@@ -162,25 +156,33 @@ class RZP_Subscription_Button extends WP_List_Table {
         }
 
         //Retrieve $customvar for use in query to get items.
-        $customvar = ( isset(($_REQUEST['status'])) ? sanitize_text_field($_REQUEST['status']) : '');
+        $customvar = (isset(($_REQUEST['status'])) ? sanitize_text_field($_REQUEST['status']) : '');
 
-        $payment_pages = $this->get_items($customvar, $per_page);
+        $payment_page = $this->get_items($customvar, $per_page);
+        $count = count($payment_page);
+        $payment_pages = array();
 
+        for($i=0; $i<$count; $i++){
+            if($i >= $offset and $i < $offset+$per_page){
+                $payment_pages[] = $payment_page[$i];
+            }
+        }
         $columns = $this->get_columns();
         $hidden = array();
         $sortable = $this->get_sortable_columns();
         $this->_column_headers = array($columns, $hidden, $sortable);   
-        usort( $payment_pages, array( &$this, 'usort_reorder' ) );
+        usort($payment_pages, array(&$this, 'usort_reorder'));
 
-        $count = count($payment_pages);
         $this->items = $payment_pages;
 
         // Set the pagination
-        $this->set_pagination_args( array(
-            'total_items' => $count,
-            'per_page'    => $per_page,
-            'total_pages' => ceil( $count / $per_page )
-        ) );
+        $this->set_pagination_args(
+            array(
+                'total_items' => $count,
+                'per_page'    => $per_page,
+                'total_pages' => ceil($count / $per_page)
+            )
+        );
     }
 
     function get_items($status, $count)
@@ -193,7 +195,7 @@ class RZP_Subscription_Button extends WP_List_Table {
 
         try
         {
-            $buttons = $api->paymentPage->all(['view_type' => 'subscription_button', "status" => $status]);
+            $buttons = $api->paymentPage->all(['view_type' => 'subscription_button', "status" => $status, 'count' => 100]);
         }
         catch (Exception $e)
         {
@@ -207,17 +209,16 @@ class RZP_Subscription_Button extends WP_List_Table {
         {
             foreach ($buttons['items'] as $button) 
             {
-              $items[] = array(
-                'id' => $button['id'],
-                'title' => $button['title'],
-                'total_sales' => '<span class="rzp-currency">₹</span> '.(int) round($button['total_amount_paid'] / 100),
-                'created_at' => date("d F Y H:i A", $button['created_at']),
-                'status' => $button['status'],
-              );
+                $items[] = array(
+                    'id' => $button['id'],
+                    'title' => $button['title'],
+                    'total_sales' => '<span class="rzp-currency">₹</span> '.(int) round($button['total_amount_paid'] / 100),
+                    'created_at' => date("d F Y H:i A", $button['created_at']),
+                    'status' => $button['status'],
+                );
             }
           }
+
         return $items;
     }
-        
-
 }
