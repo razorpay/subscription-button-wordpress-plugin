@@ -131,8 +131,9 @@ class RZP_Subscription_Button extends WP_List_Table
 
     function column_title($item) 
     {
+        $paged = isset($_REQUEST['paged']) ? $_REQUEST['paged'] : 1;
         $actions = array(
-            'view'      => sprintf('<a href="?page=%s&btn=%s">View</a>','rzp_subscription_button_view', $item['id']),
+            'view'      => sprintf('<a href="?page=%s&btn=%s&paged=%s">View</a>','rzp_subscription_button_view', $item['id'], $paged),
         );
 
         return sprintf('%1$s %2$s', $item['title'], $this->row_actions($actions, $always_visible = true));
@@ -156,7 +157,7 @@ class RZP_Subscription_Button extends WP_List_Table
         }
 
         //Retrieve $customvar for use in query to get items.
-        $customvar = (isset(($_REQUEST['status'])) ? sanitize_text_field($_REQUEST['status']) : '');
+        $customvar = (isset($_REQUEST['status']) ? sanitize_text_field($_REQUEST['status']) : '');
 
         $payment_page = $this->get_items($customvar, $per_page);
         $count = count($payment_page);
@@ -212,7 +213,7 @@ class RZP_Subscription_Button extends WP_List_Table
                 $items[] = array(
                     'id' => $button['id'],
                     'title' => $button['title'],
-                    'total_sales' => '<span class="rzp-currency">₹</span> '.(int) round($button['total_amount_paid'] / 100),
+                    'total_sales' => $button['payment_page_items'][0]['quantity_sold'],
                     'created_at' => date("d F Y H:i A", $button['created_at']),
                     'status' => $button['status'],
                 );
