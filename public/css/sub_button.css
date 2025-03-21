@@ -113,7 +113,7 @@ button:hover {
   background-color: rgba(128,128,128,0.5);
   display: none;
 }
-.modal {
+.status-modal {
   position: relative;
   display: block;
   height: 190px;
