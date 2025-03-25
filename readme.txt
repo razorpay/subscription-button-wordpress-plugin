@@ -1,8 +1,8 @@
 === Razorpay Subscription Button Plugin ===
 Contributors: razorpay
 Tags: razorpay, payments, india, ecommerce
-Tested up to: 6.0
-Stable tag: 1.0.3
+Tested up to: 6.7
+Stable tag: 1.0.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -35,6 +35,9 @@ These are the features that you will get without any premium paywalls
 6. Choose Subscription Button using the drop down button.
 
 == Changelog ==
+
+= 1.0.4 =
+* Updated SDK to 2.9.0
 
 = 1.0.3 =
 * Added Subscription button plan details
