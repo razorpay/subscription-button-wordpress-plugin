@@ -72,7 +72,7 @@ class RZP_View_Subscription_Button_Templates
                   
         </div>';
 
-        $modal = '<div class="overlay"><div class="modal">
+        $modal = '<div class="overlay"><div class="status-modal">
   <form class="modal-content" action="'.esc_url(admin_url('admin-post.php')).'" method="POST">
     <div class="container">
         <div class="modal-header">
